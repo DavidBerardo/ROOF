@@ -32,10 +32,11 @@ def unwrap_img(img,src_mask = None):
 	return times,counts
 
 #plot power_spectrum
-def plot_power_spectrum(images,frequencies = None):
+def plot_power_spectrum(images,frequencies = None,show = True):
 	'''
 	Calculate the 1/f power spectrum for a series of images, either supplied or just the raw data
 	Takes in a list of images
+	Returns frequencies and powers
 	'''
 	#convert images to a 1d array
 	shape = np.shape(images)
@@ -58,6 +59,9 @@ def plot_power_spectrum(images,frequencies = None):
 
 	power = np.median(powers,axis=0)
 
-	plt.plot(frequencies,power)
-	plt.xscale('log')
-	plt.yscale('log')
+	if show:
+		plt.plot(frequencies,power)
+		plt.xscale('log')
+		plt.yscale('log')
+	
+	return frequencies,power
